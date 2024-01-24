@@ -1,6 +1,6 @@
 const api_url = "http://www.thecocktaildb.com/api/json/v1/1/list.php?g=list";
 
-//FETCH A RANDOM JOKE
+//FETCH GLASSES (PLACEHOLDER)
 
 export const fetchGlassTypes = async () => {
     try {
