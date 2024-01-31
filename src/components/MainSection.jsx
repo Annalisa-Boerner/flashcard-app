@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import DeckList from "./DeckList";
 import HomePage from "./Home";
 import Login from "./Login";
-import Logout from "./Logout";
 import NewDeckForm from "./NewDeckForm";
 import Signup from "./Signup";
 import SingleDeck from "./SingleDeck";
