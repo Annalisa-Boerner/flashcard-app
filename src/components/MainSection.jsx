@@ -7,7 +7,7 @@ import NewDeckForm from "./NewDeckForm";
 import Signup from "./Signup";
 import SingleDeck from "./SingleDeck";
 
-export default function MainSection() {
+export default function MainSection({ login, signup }) {
     return (
         <div id="main-section">
             <Routes>
@@ -15,13 +15,13 @@ export default function MainSection() {
 
                 <Route path="/decklist" element={<DeckList />}></Route>
 
-                <Route path="/login" element={<Login />}></Route>
+                <Route path="/login" element={<Login login={login} />}></Route>
 
                 <Route path="/logout" element={<Logout />}></Route>
 
                 <Route path="/new-deck-form" element={<NewDeckForm />}></Route>
 
-                <Route path="/signup" element={<Signup />}></Route>
+                <Route path="/signup" element={<Signup signup={signup} />}></Route>
 
                 <Route path="/singledeck" element={<SingleDeck />}></Route>
             </Routes>
