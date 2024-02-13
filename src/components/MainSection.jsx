@@ -16,7 +16,7 @@ export default function MainSection({ login, signup }) {
 
                 <Route path="/login" element={<Login login={login} />}></Route>
 
-                <Route path="/new-deck-form" element={<NewDeckForm />}></Route>
+                <Route path="/newdeckform" element={<NewDeckForm />}></Route>
 
                 <Route path="/signup" element={<Signup signup={signup} />}></Route>
 

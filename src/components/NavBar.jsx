@@ -14,7 +14,7 @@ function NavBar({ logout }) {
                 <div>
                     <ul>
                         <li>
-                            <NavLink to="/new-deck-form">New Deck</NavLink>
+                            <NavLink to="/newdeckform">New Deck</NavLink>
                         </li>
 
                         <li>

@@ -5,8 +5,8 @@ const useFields = (initialState) => {
 
     const handleChange = (e) => {
         const { value, name } = e.target;
-        setFormData((formData) => ({
-            ...formData,
+        setFormData((prevFormData) => ({
+            ...prevFormData,
             [name]: value,
         }));
     };
