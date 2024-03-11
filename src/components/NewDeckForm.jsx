@@ -8,6 +8,7 @@ export default function NewDeckForm() {
     const navigate = useNavigate();
     const currentUser = useContext(UserContext);
 
+    //Initial state of form
     const INITIAL_STATE = {
         deckname: "",
         cardRows: [{ cardfront: "", cardback: "" }],
@@ -17,6 +18,7 @@ export default function NewDeckForm() {
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [errors, setErrors] = useState([]);
 
+    //HandleChange that takes into account the addition/deletion of rows
     function handleChange(e, rowIndex) {
         const { name, value } = e.target;
         const updatedCardRows = [...formData.cardRows];
@@ -32,7 +34,7 @@ export default function NewDeckForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-    
+
         try {
             const promises = formData.cardRows.map(async (card) => {
                 const cardData = {
@@ -41,18 +43,21 @@ export default function NewDeckForm() {
                     deckname: formData.deckname,
                     username: formData.username,
                 };
-    
+
                 const addCardRes = await BackendApi.addCard(cardData);
                 return addCardRes;
             });
-    
+
             const addCardResponses = await Promise.all(promises);
-    
+
             // Check if any of the requests failed
-            const failedResponses = addCardResponses.filter(res => !res);
+            const failedResponses = addCardResponses.filter((res) => !res);
             if (failedResponses.length > 0) {
                 // Handle failed responses
-                console.error("Some card addition requests failed:", failedResponses);
+                console.error(
+                    "Some card addition requests failed:",
+                    failedResponses
+                );
                 // You might want to handle these errors or retry failed requests
             } else {
                 // All requests were successful
@@ -64,7 +69,6 @@ export default function NewDeckForm() {
             // Handle error as needed
         }
     }
-    
 
     function addRow() {
         setFormData({
@@ -96,7 +100,12 @@ export default function NewDeckForm() {
                             id="deckname"
                             name="deckname"
                             value={formData.deckname}
-                            onChange={(e) => setFormData({...formData, deckname: e.target.value})}
+                            onChange={(e) =>
+                                setFormData({
+                                    ...formData,
+                                    deckname: e.target.value,
+                                })
+                            }
                             required
                         />
                     </div>
@@ -104,7 +113,10 @@ export default function NewDeckForm() {
                     <div className="form-rows">
                         {formData.cardRows.map((row, rowIndex) => (
                             <div key={rowIndex}>
-                                <label htmlFor={`cardfront-${rowIndex}`} className="form-label">
+                                <label
+                                    htmlFor={`cardfront-${rowIndex}`}
+                                    className="form-label"
+                                >
                                     Card Front:
                                 </label>
                                 <input
@@ -116,7 +128,10 @@ export default function NewDeckForm() {
                                     className="form-control"
                                     required
                                 />
-                                <label htmlFor={`cardback-${rowIndex}`} className="form-label">
+                                <label
+                                    htmlFor={`cardback-${rowIndex}`}
+                                    className="form-label"
+                                >
                                     Card Back:
                                 </label>
                                 <input
@@ -127,7 +142,10 @@ export default function NewDeckForm() {
                                     onChange={(e) => handleChange(e, rowIndex)}
                                     required
                                 />
-                                <button type="button" onClick={() => removeRow(rowIndex)}>
+                                <button
+                                    type="button"
+                                    onClick={() => removeRow(rowIndex)}
+                                >
                                     Remove Row
                                 </button>
                             </div>
@@ -142,8 +160,6 @@ export default function NewDeckForm() {
         </div>
     );
 }
-
-
 
 // import React, { useEffect, useState, useContext } from "react";
 // import { useNavigate } from "react-router-dom";

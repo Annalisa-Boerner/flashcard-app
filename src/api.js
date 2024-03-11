@@ -37,6 +37,11 @@ class BackendApi {
         return res.token;
     }
 
+    static async addDeck(data) {
+        let res = await this.request("decks", data, "post");
+        return res;
+    }
+
     static async addCard(data) {
         let res = await this.request("cards", data, "post");
         //or res.data if it's ugly
