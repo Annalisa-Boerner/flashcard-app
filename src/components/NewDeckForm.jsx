@@ -18,7 +18,7 @@ export default function NewDeckForm() {
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [errors, setErrors] = useState([]);
 
-    //HandleChange that takes into account the addition/deletion of rows
+    //handleChange that takes into account the addition/deletion of rows
     function handleChange(e, rowIndex) {
         const { name, value } = e.target;
         const updatedCardRows = [...formData.cardRows];
@@ -32,10 +32,18 @@ export default function NewDeckForm() {
         });
     }
 
+    //Submitting to database
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
+            //Create the destination deck
+            const deckData = {
+                name: formData.deckname,
+                username: formData.username,
+            };
+            const addDeckRes = await BackendApi.addDeck(deckData);
+
             const promises = formData.cardRows.map(async (card) => {
                 const cardData = {
                     cardfront: card.cardfront,
@@ -45,7 +53,7 @@ export default function NewDeckForm() {
                 };
 
                 const addCardRes = await BackendApi.addCard(cardData);
-                return addCardRes;
+                return addDeckRes, addCardRes;
             });
 
             const addCardResponses = await Promise.all(promises);

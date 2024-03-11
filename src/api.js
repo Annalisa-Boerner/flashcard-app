@@ -38,6 +38,7 @@ class BackendApi {
     }
 
     static async addDeck(data) {
+        console.log("entering addDeck in api.js; data obj:", data);
         let res = await this.request("decks", data, "post");
         return res;
     }
