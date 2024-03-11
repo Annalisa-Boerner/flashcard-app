@@ -1,40 +1,60 @@
-import { useState, useEffect } from "react";
-import { fetchGlassTypes } from "../fetching";
-import ViewDeckButton from "./ViewDeckButton";
+import { useState, useEffect, useContext } from "react";
+// import { fetchGlassTypes } from "../fetching";
+import BackendApi from "../api";
+import UserContext from "../common/UserContext";
+// import ViewDeckButton from "./ViewDeckButton";
 
 export default function DeckList() {
-    const [glasses, setGlasses] = useState([]);
-    //TODO async function to pull in decks from database
+    const [decks, setDecks] = useState([]);
+    const currentUser = useContext(UserContext);
 
-    //PLACEHOLDER, an async function to test display with drink glasses
+    const username = currentUser.username;
+    console.log("username from useContext:", username);
+    // const [glasses, setGlasses] = useState([]);
+    //TODO async function to pull in decks from database
     useEffect(() => {
-        async function getGlasses() {
+        async function fetchDecks() {
             try {
-                console.log("entering getGlasses");
-                const glassTypes = await fetchGlassTypes();
-                console.log("glassTypes.drinks", glassTypes.drinks);
-                setGlasses(glassTypes.drinks);
-                return glassTypes;
+                console.log("entering fetchDecks");
+                const fetchDeckRes = await BackendApi.allDecksByUsername(
+                    username
+                );
+                console.log("fetchDeckRes", fetchDeckRes);
+                setDecks(fetchDeckRes);
+                return fetchDeckRes;
             } catch (error) {
-                console.error(error);
+                console.error("Error fetching decks by username:", error);
             }
         }
-        getGlasses();
+        fetchDecks();
     }, []);
 
-    console.log(glasses);
+    //PLACEHOLDER, an async function to test display with drink glasses
+    // useEffect(() => {
+    //     // async function getGlasses() {
+    //     //     try {
+    //     //         console.log("entering getGlasses");
+    //     //         const glassTypes = await fetchGlassTypes();
+    //     //         console.log("glassTypes.drinks", glassTypes.drinks);
+    //     //         setGlasses(glassTypes.drinks);
+    //     //         return glassTypes;
+    //     //     } catch (error) {
+    //     //         console.error(error);
+    //     //     }
+    //     // }
+    //     // getGlasses();
+    // }, []);
+
+    // console.log(glasses);
     //map over the decks to display
     return (
         <div>
             <h2>Deck List</h2>
             <div id="deck-list-container">
-                {glasses.map((glass) => {
+                {decks.map((deck) => {
                     return (
-                        // TODO pass in props to ViewDeckButton to display correct deck
-                        <div id="deck-list-card" key={glass.strGlass}>
-                            <p>{glass.strGlass}</p>
-                            <ViewDeckButton />
-                            <br />
+                        <div id="deck-list-card" key="deck.id">
+                            <p>{deck.name}</p>
                         </div>
                     );
                 })}
@@ -42,3 +62,14 @@ export default function DeckList() {
         </div>
     );
 }
+
+// {glasses.map((glass) => {
+//     return (
+//         // TODO pass in props to ViewDeckButton to display correct deck
+//         <div id="deck-list-card" key={glass.strGlass}>
+//             <p>{glass.strGlass}</p>
+//             <ViewDeckButton />
+//             <br />
+//         </div>
+//     );
+// })}

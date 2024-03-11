@@ -30,10 +30,6 @@ function App() {
                         ? setDeckIds(new Set(currentUser.decks))
                         : setDeckIds(null);
                     setCurrentUser(currentUser);
-                    console.log(
-                        "currentUser inside of getCurrentUser function",
-                        currentUser
-                    );
                 } catch (err) {
                     setCurrentUser(null);
                 }

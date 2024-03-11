@@ -5,7 +5,7 @@ import UserContext from "../common/UserContext";
 
 function NavBar({ logout }) {
     const currentUser = useContext(UserContext);
-    console.log("currentUser top of nav", currentUser);
+    // console.log("currentUser top of nav", currentUser);
     const loggedInNavBar = (
         <nav className="NavBar">
             <div>

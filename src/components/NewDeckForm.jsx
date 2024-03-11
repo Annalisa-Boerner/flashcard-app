@@ -44,6 +44,7 @@ export default function NewDeckForm() {
             };
             const addDeckRes = await BackendApi.addDeck(deckData);
 
+            //Create cards
             const promises = formData.cardRows.map(async (card) => {
                 const cardData = {
                     cardfront: card.cardfront,

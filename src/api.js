@@ -22,7 +22,6 @@ class BackendApi {
     }
 
     static async getCurrentUser(username) {
-        // console.log("username inside getCurrentUser in api.js", username);
         let res = await this.request(`users/${username}`);
         return res.user;
     }
@@ -46,6 +45,12 @@ class BackendApi {
     static async addCard(data) {
         let res = await this.request("cards", data, "post");
         //or res.data if it's ugly
+        return res;
+    }
+
+    static async allDecksByUsername(data) {
+        let res = await this.request("decks", data);
+        console.log("data in allDecksByUsername", data);
         return res;
     }
 }
