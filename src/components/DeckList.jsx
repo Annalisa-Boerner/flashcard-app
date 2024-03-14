@@ -10,17 +10,18 @@ export default function DeckList() {
 
     const username = currentUser.username;
     console.log("username from useContext:", username);
-    // const [glasses, setGlasses] = useState([]);
+    const userObj = { "username": username }
+
     //TODO async function to pull in decks from database
     useEffect(() => {
         async function fetchDecks() {
             try {
                 console.log("entering fetchDecks");
                 const fetchDeckRes = await BackendApi.allDecksByUsername(
-                    username
+                    userObj
                 );
                 console.log("fetchDeckRes", fetchDeckRes);
-                setDecks(fetchDeckRes);
+                setDecks(fetchDeckRes.decks);
                 return fetchDeckRes;
             } catch (error) {
                 console.error("Error fetching decks by username:", error);
@@ -29,23 +30,7 @@ export default function DeckList() {
         fetchDecks();
     }, []);
 
-    //PLACEHOLDER, an async function to test display with drink glasses
-    // useEffect(() => {
-    //     // async function getGlasses() {
-    //     //     try {
-    //     //         console.log("entering getGlasses");
-    //     //         const glassTypes = await fetchGlassTypes();
-    //     //         console.log("glassTypes.drinks", glassTypes.drinks);
-    //     //         setGlasses(glassTypes.drinks);
-    //     //         return glassTypes;
-    //     //     } catch (error) {
-    //     //         console.error(error);
-    //     //     }
-    //     // }
-    //     // getGlasses();
-    // }, []);
-
-    // console.log(glasses);
+    console.log("decks above the return", decks)
     //map over the decks to display
     return (
         <div>
@@ -54,7 +39,7 @@ export default function DeckList() {
                 {decks.map((deck) => {
                     return (
                         <div id="deck-list-card" key="deck.id">
-                            <p>{deck.name}</p>
+                            <p>{deck}</p>
                         </div>
                     );
                 })}
