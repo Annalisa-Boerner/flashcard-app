@@ -7,7 +7,7 @@ class BackendApi {
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API Call:", endpoint, data, method);
-    
+
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${BackendApi.token}` };
         try {
@@ -25,7 +25,7 @@ class BackendApi {
             throw Array.isArray(message) ? message : [message];
         }
     }
-    
+
 
     static async getCurrentUser(username) {
         let res = await this.request(`users/${username}`);
@@ -56,7 +56,8 @@ class BackendApi {
 
     static async allDecksByUsername(data) {
         console.log("data in allDecksByUsername", data);
-        let res = await this.request("decks", data);
+        console.log("typeof data", typeof (data))
+        let res = await this.request("decks", data, "get");
         return res;
     }
 }
