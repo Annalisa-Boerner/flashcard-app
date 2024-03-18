@@ -71,6 +71,7 @@ export default function NewDeckForm() {
             } else {
                 // All requests were successful
                 console.log("All cards added successfully");
+                navigate("/decklist")
                 // Redirect or perform other actions as needed
             }
         } catch (error) {

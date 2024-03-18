@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-// import { fetchGlassTypes } from "../fetching";
 import BackendApi from "../api";
 import UserContext from "../common/UserContext";
 // import ViewDeckButton from "./ViewDeckButton";
@@ -12,7 +11,7 @@ export default function DeckList() {
     console.log("username from useContext:", username);
     const userObj = { "username": username }
 
-    //TODO async function to pull in decks from database
+    //Async function to pull in decks from database
     useEffect(() => {
         async function fetchDecks() {
             try {
@@ -38,8 +37,8 @@ export default function DeckList() {
             <div id="deck-list-container">
                 {decks.map((deck) => {
                     return (
-                        <div id="deck-list-card" key="deck.id">
-                            <p>{deck}</p>
+                        <div id="deck-list-card" key={deck.id}>
+                            <p >{deck}</p>
                         </div>
                     );
                 })}

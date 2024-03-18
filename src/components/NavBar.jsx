@@ -9,7 +9,7 @@ function NavBar({ logout }) {
     const loggedInNavBar = (
         <nav className="NavBar">
             <div>
-                <NavLink to="/">AppName</NavLink>
+                <NavLink to="/">Home</NavLink>
 
                 <div>
                     <ul>
@@ -22,6 +22,7 @@ function NavBar({ logout }) {
                                 Logout {currentUser && currentUser.username}
                             </NavLink>
                         </li>
+                        <li><NavLink to="/decklist">My Decks</NavLink></li>
                     </ul>
                 </div>
             </div>
