@@ -60,6 +60,13 @@ class BackendApi {
         let res = await this.request("decks", data, "get");
         return res;
     }
+
+    static async cardsByUsernameAndDeckname(data) {
+        console.log("data in cardsByUsernameAndDeckname", data)
+        let res = await this.request("cards", data, "get")
+        return res;
+    }
+
 }
 
 export default BackendApi;
