@@ -4,11 +4,10 @@ import UserContext from "../common/UserContext";
 // import ViewDeckButton from "./ViewDeckButton";
 
 export default function DeckList() {
-    const [decks, setDecks] = useState([]);
+    const [deckNames, setDeckNames] = useState([]);
     const currentUser = useContext(UserContext);
 
     const username = currentUser.username;
-    console.log("username from useContext:", username);
     const userObj = { "username": username }
 
     //Async function to pull in decks from database
@@ -20,7 +19,7 @@ export default function DeckList() {
                     userObj
                 );
                 console.log("fetchDeckRes", fetchDeckRes);
-                setDecks(fetchDeckRes.decks);
+                setDeckNames(fetchDeckRes.decks);
                 return fetchDeckRes;
             } catch (error) {
                 console.error("Error fetching decks by username:", error);
@@ -29,16 +28,17 @@ export default function DeckList() {
         fetchDecks();
     }, []);
 
-    console.log("decks above the return", decks)
+    console.log("deckNames above the return", deckNames)
+    
     //map over the decks to display
     return (
         <div>
             <h2>Deck List</h2>
             <div id="deck-list-container">
-                {decks.map((deck) => {
+                {deckNames.map((deckname) => {
                     return (
-                        <div id="deck-list-card" key={deck.id}>
-                            <p >{deck}</p>
+                        <div id="deck-list-card" key={deckname}>
+                            <p >{deckname}</p>
                         </div>
                     );
                 })}
@@ -47,13 +47,3 @@ export default function DeckList() {
     );
 }
 
-// {glasses.map((glass) => {
-//     return (
-//         // TODO pass in props to ViewDeckButton to display correct deck
-//         <div id="deck-list-card" key={glass.strGlass}>
-//             <p>{glass.strGlass}</p>
-//             <ViewDeckButton />
-//             <br />
-//         </div>
-//     );
-// })}
