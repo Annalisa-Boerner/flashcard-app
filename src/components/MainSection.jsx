@@ -4,7 +4,7 @@ import HomePage from "./Home";
 import Login from "./Login";
 import NewDeckForm from "./NewDeckForm";
 import Signup from "./Signup";
-import SingleDeck from "./SingleDeck";
+import DeckView from "./DeckView"
 
 export default function MainSection({ login, signup }) {
     return (
@@ -13,6 +13,8 @@ export default function MainSection({ login, signup }) {
                 <Route path="/" element={<HomePage />}></Route>
 
                 <Route path="/decklist" element={<DeckList />}></Route>
+                
+                <Route path="/cards/:deckname" element={<DeckView />}></Route>
 
                 <Route path="/login" element={<Login login={login} />}></Route>
 
@@ -20,7 +22,6 @@ export default function MainSection({ login, signup }) {
 
                 <Route path="/signup" element={<Signup signup={signup} />}></Route>
 
-                <Route path="/singledeck" element={<SingleDeck />}></Route>
             </Routes>
         </div>
     );
